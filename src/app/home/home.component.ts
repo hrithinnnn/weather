@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { debounceTime, filter } from 'rxjs';
 import { API_KEY, API_URL } from '../api.config';
 
 interface SearchResults {
@@ -33,9 +35,15 @@ export class HomeComponent implements OnInit {
 
   search = "";
 
+  searchControl!: FormControl;
+
   results: SearchResults[] = [];
 
   weather: Weather | null = null;
+
+  @ViewChild('menuTrigger') trigger!: MatMenuTrigger;
+
+  @ViewChild('resultDiv') resultDiv!: ElementRef<HTMLDivElement>;
 
   searchURL = `${API_URL}/search.json?key=${API_KEY}`;
 
@@ -43,7 +51,19 @@ export class HomeComponent implements OnInit {
 
   ipURL = `${API_URL}/forecast.json?key=${API_KEY}&q=auto:ip`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+    this.searchControl = new FormControl('');
+
+    this.searchControl.valueChanges.pipe(
+      filter((val) => !!val),
+      debounceTime(500)
+    ).subscribe((val) => {
+
+      this.searchCall(val);
+      // this.trigger.openMenu();
+    })
+  }
 
   ngOnInit(): void {
 
@@ -57,16 +77,26 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  searchCall() {
+  searchCall(search: string) {
 
-    if(!this.search || this.search === "") return;
-
-    this.http.get(`${this.searchURL}&q=${this.search}`).subscribe((res) => {
+    this.http.get(`${this.searchURL}&q=${search}`).subscribe((res) => {
 
       if(!res) return;
 
       this.results = res as SearchResults[];
+
+      this.openResult();
     })
+  }
+
+  closeResult() {
+
+    this.resultDiv.nativeElement.style.display = 'none';
+  }
+
+  openResult() {
+
+    this.resultDiv.nativeElement.style.display = 'unset';
   }
 
   showWeather(url: string) {
@@ -79,8 +109,18 @@ export class HomeComponent implements OnInit {
 
       this.weather = res as Weather;
 
-      console.log(res);
     })
+  }
+
+  clickBody(event: MouseEvent) {
+
+    if(!event.target) return;
+
+    // console.log('event', event.target)
+
+    // if(Array.from(this.resultDiv.nativeElement.children).includes(event.target as Element)) return;
+
+    this.closeResult();
   }
 
 }

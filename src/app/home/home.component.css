@@ -1,4 +1,25 @@
-body {
+.results {
+  border-radius: 5px;
+  width: 50%;
+  background-color:#AFB4FF;
+  position: relative;
+  transition: display 0.5s;
+  display: none;
+  z-index: 10;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+mat-list-item {
+  cursor: pointer;
+}
+
+mat-list-item:hover {
+  opacity: 0.4;
+}
+
+
+.body {
 	/* width: 100%; */
 	/* height: 100vh; */
     background: linear-gradient(-135deg, #c850c0, #4158d0);
@@ -63,7 +84,7 @@ body {
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: #11998e;
+    color: #B1E1FF;
     font-weight: 700;
  }
  /* reset input */
@@ -97,6 +118,7 @@ body {
   margin-top: auto;
   margin-left : auto;
   margin-right:auto;
+  z-index: 9;
 
 }
 
