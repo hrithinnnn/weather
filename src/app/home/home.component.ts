@@ -9,14 +9,17 @@ interface SearchResults {
   country: string,
   region: string,
   name: string,
+  humidity:string
   url: string
 }
 
 interface Weather {
   current: {
+    humidity:string,
     condition: {
       text: string,
-      icon: string
+      icon: string,
+      
     },
     feelslike_c: number,
     temp_c: number,

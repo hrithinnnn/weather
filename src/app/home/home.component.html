@@ -3,7 +3,7 @@
   <!-- <input type="text" [(ngModel)]="search"> -->
   <div class="form__group field">
     <input #search type="input" class="form__field" placeholder="Name" name="name" id='name' required [formControl]="searchControl" />
-    <label for="name" class="form__label">Name</label>
+    <label for="name" class="form__label">Place</label>
   </div>
   <div #resultDiv class="results">
   
@@ -31,10 +31,10 @@
 <!-- <div class="gradient-wrapper absolute-center"> -->
 
 <div class="weather absolute-center" *ngIf="weather">
-
-  <div class="icon"><img src = "{{ weather.current.condition.icon}}"></div>
+  <div class="icon"><img src = "{{ weather.current.condition.icon}}" ></div>
   <div class="name line">{{weather.location.name}}</div>
     <div class="condition line">{{ weather.current.condition.text }}</div>
+    <div class="condition line">humidity: {{ weather.current.humidity }}%</div>
     <div class="feels-like line">Feels like: {{ weather.current.feelslike_c }}' C</div>
     <div class="temp line"> Temperature: {{ weather.current.temp_c }}' C</div>
   </div>
