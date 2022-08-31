@@ -2,7 +2,7 @@
 
   <!-- <input type="text" [(ngModel)]="search"> -->
   <div class="form__group field">
-    <input #search type="input" class="form__field" placeholder="Name" name="name" id='name' required [formControl]="searchControl" />
+    <input #search type="input" class="form__field" placeholder="Name" name="name" id='name' required [(ngModel)]="namee" [formControl]="searchControl" />
     <label for="name" class="form__label">Place</label>
   </div>
   <div #resultDiv class="results">

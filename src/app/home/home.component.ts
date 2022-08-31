@@ -38,6 +38,8 @@ export class HomeComponent implements OnInit {
 
   search = "";
 
+  namee!: "";
+
   searchControl!: FormControl;
 
   results: SearchResults[] = [];
@@ -93,7 +95,7 @@ export class HomeComponent implements OnInit {
   }
 
   closeResult() {
-
+    this.namee="";
     this.resultDiv.nativeElement.style.display = 'none';
   }
 
@@ -118,6 +120,7 @@ export class HomeComponent implements OnInit {
   clickBody(event: MouseEvent) {
 
     if(!event.target) return;
+
 
     // console.log('event', event.target)
 
