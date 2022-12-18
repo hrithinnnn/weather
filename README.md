@@ -1,6 +1,6 @@
 # Weather
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+Simple weather app to learn implementation of APIs.
+Enter city name to get the weather for that area.
 
 ## Development server
 
