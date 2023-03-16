@@ -1,7 +1,7 @@
 .results {
   border-radius: 5px;
   width: 50%;
-  background-color:#AFB4FF;
+  background-color:#FFFFFF;
   position: relative;
   transition: display 0.5s;
   display: none;
